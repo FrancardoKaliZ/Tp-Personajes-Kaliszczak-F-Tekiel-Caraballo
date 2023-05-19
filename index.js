@@ -3,7 +3,7 @@ import peliSerieServices from './services/peliSerie-services.js';
 import express from 'express';
 import sql from 'mssql'
 const app = express();
-const port = 3000;
+const port = 3001;
 /*PERSONAJE:*/
 app.listen(port, ()=>{
     console.log('Listening on port: ',port)
