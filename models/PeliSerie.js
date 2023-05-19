@@ -1,8 +1,8 @@
-class Pelicula {
+class PeliSerie {
     Id;
     Imagen;
     Titulo;
     FechaDeCreacion;
     Calificaion; 
 }
-export default Pelicula;
+export default PeliSerie;
