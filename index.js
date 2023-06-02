@@ -75,7 +75,7 @@ app.get('/peliSerie/:Id' , async (req, res) =>{
     res.status(200).send(peliSerie)
 });
 app.use(express.json());
-app.post('/peliSerie', async(req, res)=>{
+app.post('/peliSerie/post', async(req, res)=>{
     try{
         await peliSerieServices.insert(req.body)
         res.status(200).json ({message: 'peliSerie creado con exito, QUE TENGAS UN MUY LINDO DIA (QUE ESTAFA EL GAMING DEL EVENTO)'});
@@ -84,7 +84,7 @@ app.post('/peliSerie', async(req, res)=>{
         res.status(500).json({error: 'No se pudo crear la peliSerie (QUE ESTAFA EL GAMING DEL EVENTO)'});
     }
 });
-app.put('/peliSerie', async(req, res)=>{
+app.put('/peliSerie/put', async(req, res)=>{
     try{
         console.log(req);
         await peliSerieServices.update(req.body);
@@ -95,7 +95,7 @@ app.put('/peliSerie', async(req, res)=>{
     }
 
 });
-app.delete('/personaje/:Id', async(req,res)=>{
+app.delete('/personaje/delete/:Id', async(req,res)=>{
     try{
         await peliSerieServices.deleteById(req.params.Id)
         res.status(200).json({message : 'Se borro la maldita peliSerie con exito'})

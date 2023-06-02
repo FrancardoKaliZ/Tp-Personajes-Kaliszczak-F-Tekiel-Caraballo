@@ -35,7 +35,7 @@ class personajeServices{
             let results = await pool.request()
                                 .input('pId', sql.Int, Id)
                                 .query('DELETE FROM Personaje WHERE Id = @pId');
-             returnPersonaje =results.recordsets[0][0];                              
+             returnPersonaje =results.recordsets[0];                              
         } 
         catch(error){console.log(error)}
         return returnPersonaje;
