@@ -108,7 +108,7 @@ app.get('/peliSerie/:Titulo' , async (req, res) =>{
     const peliSerie = await peliSerieServices.getByTitulo(req.params.Titulo)
     res.status(200).send(peliSerie)
 });
-app.get('/peliSerie/:OrderByFecha' , async (req, res) =>{
+app.get('/peliSerie/OrderByFecha' , async (req, res) =>{
     const peliSerie = await peliSerieServices.OrderByFechaCreacion()
     res.status(200).send(peliSerie)
 });
