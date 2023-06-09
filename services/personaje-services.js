@@ -41,18 +41,18 @@ class personajeServices{
         return returnPersonaje;
     }
     
-    static update = async(Personaje) => {
+    static update = async(Personaje, Id) => {
         let returnPersonaje = null;
         const {Imagen, Nombre, Edad, Peso, Historia} = Personaje
         console.log(Personaje);
         try{
             let pool =await sql.connect(config);
             let results = await pool.request()
-                                .input('pId', sql.Int, Personaje.Id)
+                                .input('pId', sql.Int, Id)
                                 .input('Imagen', sql.NVarChar, Personaje.Imagen)
                                 .input('Nombre', sql.NVarChar, Personaje.Nombre)
                                 .input('Edad', sql.Int, Personaje.Edad)
-                                .input('Peso', sql.NVarChar, Personaje.Peso)
+                                .input('Peso', sql.Float, Personaje.Peso)
                                 .input('Historia', sql.NVarChar, Personaje.Historia)
                                 .query('UPDATE Personaje SET Imagen = @Imagen, Nombre = @Nombre, Edad = @Edad, Peso = @Peso, Historia = @Historia WHERE Id = @pId');
              returnPersonaje =results.rowsaffected;                              
@@ -71,7 +71,7 @@ class personajeServices{
                                 .input('Imagen', sql.NVarChar, Personaje.Imagen)
                                 .input('Nombre', sql.NVarChar, Personaje.Nombre)
                                 .input('Edad', sql.Int, Personaje.Edad)
-                                .input('Peso', sql.NVarChar, Personaje.Peso)
+                                .input('Peso', sql.Float, Personaje.Peso)
                                 .input('Historia', sql.NVarChar, Personaje.Historia)
                                 .query('INSERT INTO Personaje(Imagen,Nombre,Edad,Peso,Historia) VALUES(@Imagen,@Nombre,@Edad,@Peso,@Historia)');
              returnPersonaje =results.rowsaffected;                              

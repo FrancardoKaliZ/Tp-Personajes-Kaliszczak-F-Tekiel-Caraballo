@@ -28,10 +28,10 @@ app.post('/personaje', async(req, res)=>{
         res.status(500).json({error: 'No se pudo crear el personaje (QUE ESTAFA EL GAMING DEL EVENTO)'});
     }
 });
-app.put('/personaje', async(req, res)=>{
+app.put('/personajeUpdate/:Id', async(req, res)=>{
     try{
         console.log(req);
-        await personajeServices.update(req.body);
+        await personajeServices.update(req.body, req.params.Id);
         res.status(200).json ({message: 'Cambios realizados con exito'});
     } catch(error){
         console.error(error);
