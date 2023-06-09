@@ -22,7 +22,7 @@ class peliSerieServices{
             let results = await pool.request()
                                 .input('pId', sql.Int, Id)
                                 .query('SELECT PS.*,P.Imagen,P.Nombre FROM PeliSerie PS INNER JOIN PersonajeXPeliSerie PPS ON PS.Id = PPS.IdPeliSerie INNER JOIN Personaje P ON PPS.IdPersonaje = P.Id  WHERE Id = @pId');
-             returnPeliSerie = results.recordsets[0][0];                              
+             returnPeliSerie = results.recordset[0];                              
         } 
         catch(error){console.log(error)}
         return returnPeliSerie;
@@ -35,7 +35,7 @@ class peliSerieServices{
             let results = await pool.request()
                                 .input('pId', sql.Int, Id)
                                 .query('DELETE FROM PeliSerie WHERE Id = @pId');
-             returnPeliSerie =results.recordsets[0][0];                              
+             returnPeliSerie =results.rowsaffected;                              
         } 
         catch(error){console.log(error)}
         return returnPeliSerie;
@@ -84,9 +84,10 @@ class peliSerieServices{
             let results = await pool.request()
                                 .input('Titulo', sql.NVarChar, Titulo)
                                 .query('SELECT * FROM PeliSerie WHERE Titulo = @Titulo');
-             returnPeliSerie = results.recordsets[0][0];                              
+             returnPeliSerie = results.recordset[0];                              
         } 
         catch(error){console.log(error)}
+        console.log(returnPeliSerie);
         return returnPeliSerie;
     }
     static OrderByFechaCreacion = async() => {
@@ -95,8 +96,8 @@ class peliSerieServices{
             let pool =await sql.connect(config);
             let results = await pool.request()
                                 .query('SELECT Id,Imagen,Titulo,FechaCreacion FROM PeliSerie ORDER BY FechaCreacion ASC');
-            console.log(results);
-             returnPeliSerie = results.recordset[0];                              
+            console.log("ORDERBYCREACION", results.recordset[0]);
+             returnPeliSerie = results.recordset;                              
         } 
         catch(error){console.log(error)}
         return returnPeliSerie;

@@ -22,7 +22,7 @@ class personajeServices{
             let results = await pool.request()
                                 .input('pId', sql.Int, Id)
                                 .query('SELECT P.*,PS.Imagen, PS.Titulo FROM Personaje P INNER JOIN PersonajeXPeliSerie PPS ON P.Id = PPS.IdPersonaje INNER JOIN PeliSerie PS ON PPS.IdPeliSerie = PS.Id  WHERE Id = @pId');
-             returnPersonaje = results.recordsets[0][0];                              
+             returnPersonaje = results.recordset[0];                              
         } 
         catch(error){console.log(error)}
         return returnPersonaje;
@@ -35,7 +35,7 @@ class personajeServices{
             let results = await pool.request()
                                 .input('pId', sql.Int, Id)
                                 .query('DELETE FROM Personaje WHERE Id = @pId');
-             returnPersonaje =results.recordsets[0];                              
+             returnPersonaje =results.rowsaffected;                              
         } 
         catch(error){console.log(error)}
         return returnPersonaje;
@@ -84,11 +84,12 @@ class personajeServices{
         try{
             let pool =await sql.connect(config);
             let results = await pool.request()
-                                .input('Nombre', sql.NVarChar, Nombre)
+                                .input('Nombre', sql.VarChar, Nombre)
                                 .query('SELECT * FROM Personaje WHERE Nombre = @Nombre');
-             returnPersonaje = results.recordsets[0][0];                              
+             returnPersonaje = results.recordset[0];                              
         } 
         catch(error){console.log(error)}
+        console.log(returnPersonaje)
         return returnPersonaje;
     }
     static OrderByEdad = async() => {
@@ -110,7 +111,7 @@ class personajeServices{
             let results = await pool.request()
                                 .query('SELECT Id,Imagen,Nombre FROM Personaje ORDER BY Peso ASC');
             console.log(results);
-             returnPersonaje = results.recordset[0];                              
+             returnPersonaje = results.recordset;                              
         } 
         catch(error){console.log(error)}
         return returnPersonaje;
@@ -121,11 +122,12 @@ class personajeServices{
             let pool =await sql.connect(config);
             let results = await pool.request()
                                 .input('pId', sql.Int, Id)
-                                .query('SELECT P.Id,P.Imagen,P.Nombre, FROM Personaje P INNER JOIN PersonajeXPeliSerie PPS ON P.Id = PPS.IdPersonaje WHERE PPS.IdPeliSerie = @pId ');
+                                .query('SELECT P.Id,P.Imagen,P.Nombre FROM Personaje P INNER JOIN PersonajeXPeliSerie PPS ON P.Id = PPS.IdPersonaje WHERE PPS.IdPeliSerie = @pId ');
             console.log(results);
              returnPersonaje = results.recordset[0];                              
         } 
         catch(error){console.log(error)}
+        console.log(returnPersonaje)
         return returnPersonaje;
     }
 }

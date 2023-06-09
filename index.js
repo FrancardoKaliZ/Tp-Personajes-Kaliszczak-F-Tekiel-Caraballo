@@ -14,7 +14,7 @@ app.get('/personaje' , async (req, res) =>{
     res.status(200).send(personaje)
 });
 
-app.get('/personaje/:Id' , async (req, res) =>{
+app.get('/personajeId/:Id' , async (req, res) =>{
     const personaje = await personajeServices.getById(req.params.Id)
     res.status(200).send(personaje)
 });
@@ -48,19 +48,19 @@ app.delete('/personaje/:Id', async(req,res)=>{
         res.status(500).json({message : 'No se pudo borrar el personaje'})
     }
 });
-app.get('/personaje/:Nombre' , async (req, res) =>{
+app.get('/personajeName/:Nombre' , async (req, res) =>{
     const personaje = await personajeServices.getByName(req.params.Nombre);
     res.status(200).send(personaje)
 });
-app.get('/personaje/ByEdad' , async (req, res) =>{
+app.get('/personajeByEdad/ByEdad' , async (req, res) =>{
     const personaje = await personajeServices.OrderByEdad();
     res.status(200).send(personaje)
 });
-app.get('/personaje/ByPeso' , async (req, res) =>{
+app.get('/personajeByPeso/ByPeso' , async (req, res) =>{
     const personaje = await personajeServices.OrderByPeso();
     res.status(200).send(personaje)
 });
-app.get('/personaje/:Id' , async (req, res) =>{
+app.get('/personajeByPeli/:Id' , async (req, res) =>{
     const personaje = await personajeServices.OrderByPeliculaSerie(req.params.Id)
     res.status(200).send(personaje)
 });
@@ -70,7 +70,7 @@ app.get('/peliSerie' , async (req, res) =>{
     res.status(200).send(peliSerie)
 });
 
-app.get('/peliSerie/:Id' , async (req, res) =>{
+app.get('/peliSerieId/:Id' , async (req, res) =>{
     const peliSerie = await peliSerieServices.getById(req.params.Id)
     res.status(200).send(peliSerie)
 });
@@ -104,7 +104,7 @@ app.delete('/personaje/delete/:Id', async(req,res)=>{
         res.status(500).json({message : 'No se pudo borrar la peliSerie'})
     }
 });
-app.get('/peliSerie/:Titulo' , async (req, res) =>{
+app.get('/peliSerieTitulo/:Titulo' , async (req, res) =>{
     const peliSerie = await peliSerieServices.getByTitulo(req.params.Titulo)
     res.status(200).send(peliSerie)
 });
